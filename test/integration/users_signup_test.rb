@@ -43,6 +43,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template "users/show"
     assert_not flash.empty?
     assert_select "div.alert-success", "Welcome to the Sample App!"
-
+    assert logged_in?
   end
 end
