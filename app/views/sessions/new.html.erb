@@ -1,11 +1,11 @@
 <% provide(:title, "Log in") %>
 
-<h1>Log in</h1>
+  <h1>Log in</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
 
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control" %>
@@ -15,13 +15,18 @@
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
 
-    <% end %>
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>Remember me on this computer</span>
+      <% end %>
 
-    <p>
-      New user?
-      <a href="/sign_up">Sign up now!</a>
-    </p>
+      <% end %>
 
-  </div>
+  <p>
+    New user?
+    <a href="/sign_up">Sign up now!</a>
+  </p>
+
+</div>
 
 </div>

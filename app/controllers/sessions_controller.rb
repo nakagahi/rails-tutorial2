@@ -9,9 +9,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
 
-      log_in(user)
+      log_in user
 
-      redirect_to "/users/#{user.id}"
+      params[:session][:remember_me] == "1" ? remember(user) : forget(user)
+
+      redirect_to user
 
     else
 
@@ -23,7 +25,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if loged_in?
     redirect_to root_path
   end
 end

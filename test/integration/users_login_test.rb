@@ -48,8 +48,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
     assert_not logged_in?
     assert_redirected_to root_path
-    follow_redirect!
 
+
+    delete logout_path #２つ目のウィンドウでログアウト
+    follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path, count: 0
     assert_select "a[href=?]", root_path
@@ -68,4 +70,23 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   get root_path
   assert flash.empty?
   end
+
+  test "クッキーの暴走" do
+
+    assert_not @user.authenticated?("")
+
+  end
+
+  test "ログインしてログアウトした時のcookiesの値" do
+
+    log_in_as(@user)
+    assert_not_empty cookies[:remember_token]
+    delete logout_path
+    assert_empty cookies[:remember_token]
+
+    log_in_as(@user, remember_me: "0")
+    assert_empty cookies[:remember_token]
+
+  end
+
 end
