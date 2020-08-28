@@ -59,5 +59,25 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  #　アクセスしようとしたURLを覚えておく
+  def store_location
+
+    session[:fowarding_url] = request.original_url if request.get?
+
+  end
+
+  def redirect_back_or(default)
+
+    redirect_to(session[:fowarding_url] || default )
+    session.delete(:fowarding_url)
+
+  end
+
+  def current_user?(user)
+
+    current_user == user
+
+  end
+
 
 end

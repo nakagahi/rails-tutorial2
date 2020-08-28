@@ -1,0 +1,21 @@
+
+
+<%= form_with(model: @user, local: true) do |f| %>
+
+<%= render 'shared/error_messages'%>
+
+<%= f.label :Name%>
+<%= f.text_field :name, class: 'form-control' %>
+
+<%= f.label :Email %>
+<%= f.email_field :email, class: "form-control" %>
+
+<%= f.label :password %>
+<%= f.password_field :password, class: "form-control" %>
+
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation, class: "form-control" %>
+
+<%= f.submit "Update Profiel!", class: "btn btn-primary" %>
+
+<% end %>
