@@ -66,7 +66,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'powerful-lake-29966.herokuapp.com.herokuapp.com'
+  host = 'rails-tutorial-2-1.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
@@ -84,7 +84,7 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
+  # Use default logging formatter so that PID and timestamp are not supprehessed.
   config.log_formatter = ::Logger::Formatter.new
 
   # Use a different logger for distributed setups.
