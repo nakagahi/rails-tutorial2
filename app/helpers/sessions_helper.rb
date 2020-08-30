@@ -19,7 +19,7 @@ module SessionsHelper
 
       user = User.find_by(id: user_id)
 
-      if user && user.authenticated?(cookies[:remember_token])
+      if user && user.authenticated?(:remember, cookies[:remember_token])
 
         log_in user
 
@@ -76,6 +76,18 @@ module SessionsHelper
   def current_user?(user)
 
     current_user == user
+
+  end
+
+  def send_activation_email(user)
+    UserMailer.account_activation(user).deliver_now
+  end
+
+  def active(user)
+
+    user.update_attribute(:activated, true)
+
+    user.update_attribute(:activated_at, Time.zone.now)
 
   end
 

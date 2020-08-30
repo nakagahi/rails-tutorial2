@@ -18,13 +18,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
       assert_not logged_in?
 
-      assert_template "sessions/new"
+      assert_redirected_to root_path
 
       assert_not flash.empty?
-
-      get root_path
-
-      assert flash.empty?
 
   end
 
@@ -60,20 +56,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   end
 
-  test "メールアドレスは正しいがpasswordが間違えているときのtest" do
-  get login_path
-  assert_template 'sessions/new'
-  post login_path, params: { session: { email:    @user.email,
-                                        password: "invalid" } }
-  assert_template 'sessions/new'
-  assert_not flash.empty?
-  get root_path
-  assert flash.empty?
-  end
-
   test "クッキーの暴走" do
 
-    assert_not @user.authenticated?("")
+    assert_not @user.authenticated?(:remember, "")
 
   end
 
