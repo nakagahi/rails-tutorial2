@@ -83,6 +83,8 @@ module SessionsHelper
     UserMailer.account_activation(user).deliver_now
   end
 
+
+
   def active(user)
 
     user.update_attribute(:activated, true)

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :password_resets, only: [:new, :edit, :create, :update]
   resources :account_activations, only: [:edit]
 
   get '/login', to: 'sessions#new'
