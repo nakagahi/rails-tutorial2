@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
    validates :password, length: {minimum: 6}, presence: true, allow_nil: true
 
+  has_many :microposts, dependent: :destroy
+
 
    has_secure_password
 
@@ -79,8 +81,15 @@ class User < ApplicationRecord
      reset_sent_at < 2.hours.ago
    end
 
+   def feed
+
+     Micropost.where("user_id=?", self.id)
+
+   end
 
    private
+
+
 
    def create_activation_digest
 
@@ -98,6 +107,8 @@ class User < ApplicationRecord
      self.email = self.email.downcase
 
    end
+
+
 
 
 
