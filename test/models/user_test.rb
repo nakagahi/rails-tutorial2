@@ -88,5 +88,19 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "ユーザが削除されると関連しているマイクロソフトも削除される" do
+
+    @user.save
+
+    @user.microposts.create!(content: "abc")
+
+    assert_difference "Micropost.count", -1 do
+
+      @user.destroy
+
+    end
+
+  end
+
 
 end

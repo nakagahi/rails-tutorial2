@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :microposts, only: [:create, :destroy]
+
   resources :password_resets, only: [:new, :edit, :create, :update]
   resources :account_activations, only: [:edit]
 
