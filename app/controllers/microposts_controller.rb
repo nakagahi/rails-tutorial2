@@ -6,6 +6,7 @@ class MicropostsController < ApplicationController
   def create
 
     @micropost = current_user.microposts.build(micropost_params)
+    @micropost.image.attach(params[:micropost][:image])
 
     if @micropost.save
 
@@ -31,7 +32,7 @@ class MicropostsController < ApplicationController
 
   def micropost_params
 
-    params.require(:micropost).permit(:content)
+    params.require(:micropost).permit(:content,:image)
 
   end
 
